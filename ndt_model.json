@@ -1,0 +1,106 @@
+{
+  "testbed": {
+    "name": "5G Fronthaul Emulation Testbed",
+    "description": "Digital Twin representation of the physical 5G testbed for monitoring, simulation, and AI-based analysis",
+    "components": [
+      {
+        "id": "core01",
+        "name": "Open5GS Core Server",
+        "type": "CoreNetwork",
+        "hardware": "Dell PowerEdge R630",
+        "interfaces": {
+          "eth0": "10G SFP+"
+        },
+        "status": "online",
+        "metrics": {
+          "cpu_usage": 17.3,
+          "sessions": 12,
+          "auth_failures": 0
+        }
+      },
+      {
+        "id": "ran01",
+        "name": "srsRAN CU/DU Server",
+        "type": "BasebandUnit",
+        "hardware": "Dell PowerEdge R730",
+        "interfaces": {
+          "eth0": "10G SFP+"
+        },
+        "status": "online",
+        "metrics": {
+          "tx_packets": 48230,
+          "rx_packets": 47910,
+          "latency_ms": 3.2
+        }
+      },
+      {
+        "id": "usrp01",
+        "name": "USRP X310",
+        "type": "RadioUnit",
+        "status": "online",
+        "interfaces": {
+          "sfp1": "Connected to ZTE Switch"
+        },
+        "metrics": {
+          "snr_db": 24.7,
+          "rx_power_dbm": -48,
+          "tx_gain": 70
+        }
+      },
+      {
+        "id": "switch01",
+        "name": "ZTE ZXR10 5250",
+        "type": "NetworkSwitch",
+        "status": "online",
+        "interfaces": {
+          "ports": 24,
+          "mirroring": true
+        },
+        "metrics": {
+          "port_utilization_percent": 35.4,
+          "packet_drops": 0
+        }
+      },
+      {
+        "id": "ue01",
+        "name": "Poco M4 Pro",
+        "type": "UserEquipment",
+        "status": "active",
+        "sim": {
+          "programmable": true,
+          "imsi": "001010123456789"
+        },
+        "metrics": {
+          "download_speed_mbps": 83.4,
+          "upload_speed_mbps": 12.1,
+          "rsrp_dbm": -96
+        }
+      },
+      {
+        "id": "collector01",
+        "name": "Data Collection PC",
+        "type": "MonitoringNode",
+        "hardware": "Intel NUC",
+        "status": "online",
+        "interfaces": {
+          "mirror_port": "srsRAN"
+        },
+        "metrics": {
+          "captured_packets": 153924,
+          "disk_usage_percent": 42.7
+        }
+      },
+      {
+        "id": "rogue01",
+        "name": "Rogue PC",
+        "type": "AdversarialNode",
+        "hardware": "Intel NUC",
+        "status": "idle",
+        "metrics": {
+          "attack_type": "None",
+          "attack_packets_sent": 0
+        }
+      }
+    ]
+  }
+}
